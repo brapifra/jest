@@ -3,10 +3,10 @@ name: Node CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   test:
@@ -19,17 +19,17 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: install
-      run: |
-        node scripts/remove-postinstall
-        yarn --no-progress --frozen-lockfile --ignore-engines
-        node scripts/build
-    - name: run tests
-      run: yarn test-ci-partial
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install
+        run: |
+          node scripts/remove-postinstall
+          yarn --no-progress --frozen-lockfile --ignore-engines
+          node scripts/build
+      - name: run tests
+        run: yarn test-ci-partial
+        env:
+          CI: true
